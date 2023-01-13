@@ -27,7 +27,7 @@ fun sum(c:Int): Int{
 if (c < 0) return 0
 if (c == 0){
     count++
-    return count
+
 }
     sum(c-1)
     sum(c-2)
