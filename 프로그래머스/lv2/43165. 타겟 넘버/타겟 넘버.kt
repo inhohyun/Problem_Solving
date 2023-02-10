@@ -1,19 +1,20 @@
 class Solution {
     fun solution(numbers: IntArray, target: Int): Int {
         var answer = 0
-      
         
-        fun dfs(index: Int, temp:Int){
-            if(index < numbers.size-1){
-                dfs(index+1, temp+numbers[index])
-                dfs(index+1, temp-numbers[index])
+        fun dfs(index:Int, sum:Int){
+            if(index == numbers.size){
+                if(target == sum) answer++
+                
+                return
+                
             }
-            else{
-                if(temp+numbers[index] == target) answer++
-                if(temp-numbers[index] == target) answer++
-            }
+            
+            
+            dfs(index+1, sum+numbers[index])
+            dfs(index+1, sum-numbers[index])
         }
-          dfs(0,0)
+        dfs(0,0)
         return answer
     }
 }
