@@ -1,36 +1,73 @@
-
 class Solution {
-    // 1. 배열에 저장
-    // 2. 정답 수를 저장할 배열 생성
-    // 3. %를 이용해 정답 비교
     fun solution(answers: IntArray): IntArray {
-        var answer = mutableListOf<Int>()
-        // 12345
-        // 21232425
-        // 3311224455
-        var one = arrayOf(1,2,3,4,5)
-        var two = arrayOf(2,1,2,3,2,4,2,5)
-        var three = arrayOf(3,3,1,1,2,2,4,4,5,5)
-    
-        var ok = arrayOf(0,0,0)
-        
+        var answer = IntArray(0)
+        val one = intArrayOf(1,2,3,4,5)
+        val two = intArrayOf(2,1,2,3,2,4,2,5)
+        val three = intArrayOf(3,3,1,1,2,2,4,4,5,5)
+        var oneAnswer = 0
+        var twoAnswer = 0
+        var threeAnswer = 0
         for(i in 0 until answers.size){
-            if(answers[i] == one[i % one.size]) ok[0] = ok[0]+1
-            if(answers[i] == two[i % two.size]) ok[1] = ok[1]+1
-            if(answers[i] == three[i % three.size]) ok[2] = ok[2]+1
+         val j = i % 5
+                 if(answers[i] == one[j])  {
+                     oneAnswer++
+                 }  
         }
-        val max = ok.maxOrNull()
-        //ok에서 맞춘 수 중 최대값 == max
+          for(i in 0 until answers.size){
+         val j = i % 8
+                 if(answers[i] == two[j])  {
+                     twoAnswer++
+                 }  
+        }
+        for(i in 0 until answers.size){
+         val j = i % 10
+                 if(answers[i] == three[j])  {
+                     threeAnswer++
+                 }  
+        }
+    //1번이 최다일때
+        if(oneAnswer > twoAnswer && oneAnswer > threeAnswer){
+           answer = IntArray(1)
+            answer[0] = 1
+        }
+        //2번이 최다일때
+        else if(oneAnswer < twoAnswer && twoAnswer > threeAnswer)
+        {
+              answer = IntArray(1)
+            answer[0] = 2
+        }
+        //3번이 최다일때
+        else if(threeAnswer > twoAnswer && oneAnswer < threeAnswer){
+              answer = IntArray(1)
+            answer[0] = 3
+        }
+        //1,2번이 최다일때
+        else if(oneAnswer == twoAnswer && oneAnswer > threeAnswer){
+             answer = IntArray(2)
+            answer[0] = 1
+            answer[1] = 2
+        }
+        //1,3번이 최다일때
+        else if(oneAnswer == threeAnswer && oneAnswer > twoAnswer){
+                answer = IntArray(2)
+            answer[0] = 1
+            answer[1] = 3
+        }
+        //2,3번이 최다일때
+        else if(twoAnswer == threeAnswer && twoAnswer > oneAnswer){
+               answer = IntArray(2)
+            answer[0] = 2
+            answer[1] = 3
+        }
+        //1,2,3번이 최다일때
+        else{
+             answer = IntArray(3)
+            answer[0] = 1
+            answer[1] = 2
+            answer[2] = 3
+        }
         
-        for(i in 0 until ok.size){
-            if(ok[i] == max){
-                answer.add(i+1)
-            }
-            else{
-                continue
-            }
-        }
-    
-        return answer.toIntArray()
+        
+        return answer
     }
 }
