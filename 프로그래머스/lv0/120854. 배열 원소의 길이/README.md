@@ -1,10 +1,10 @@
 # [level 0] 배열 원소의 길이 - 120854 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/120854) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/120854?language=python3) 
 
 ### 성능 요약
 
-메모리: 61 MB, 시간: 8.62 ms
+메모리: 10.2 MB, 시간: 0.00 ms
 
 ### 구분
 
