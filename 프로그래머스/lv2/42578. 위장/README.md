@@ -1,10 +1,10 @@
 # [level 2] 위장 - 42578 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42578?language=python3) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42578?language=kotlin) 
 
 ### 성능 요약
 
-메모리: 10.3 MB, 시간: 0.01 ms
+메모리: 61.9 MB, 시간: 0.07 ms
 
 ### 구분
 
