@@ -1,25 +1,19 @@
-n = int(input())
-ans = 0
-consulting = []
+N = int(input())
 
-def go(n, index, temp):
-    if index == n:
-        global ans
-        if ans < temp:
-            ans = temp
-        return 
-    if index > n:
-        return 
-    # 상담을 하는 경우
-    go(n, index + consulting[index][0], temp + consulting[index][1])
-    # 상담을 안하는 경우
-    go(n, index+1, temp)
+T = []
+P = []
+for i in range(N):
+    a, b = map(int, input().split())
+    T.append(a)
+    P.append(b)
+
+dp = [0] * (N+1)
+
+for n in range(N-1, -1, -1): # 뒤에서 앞으로(완료 기준)
+    if n+T[n] <= N: # 기간내 상담이 가능하다면
+        dp[n] = max(dp[n+1], dp[n+T[n]] + P[n])
+    else:
+        dp[n] = dp[n+1]
 
 
-
-for i in range(n):
-    t, p = map(int, input().split())
-    consulting.append((t, p))
-
-go(n, 0, 0)
-print(ans)
+print(dp[0])
