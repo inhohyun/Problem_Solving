@@ -1,37 +1,25 @@
 n, k = map(int, input().split())
-data = []
+female = [0] * 1000
+male = [0] * 1000
 for _ in range(n):
     s, y = map(int, input().split())
-    # 튜플 형태로 저장
-    data.append((s, y))
-data.sort()
-# 방에 한 명 넣어놓고 시작
-ans = 1
-current_box = data.pop()
-current_person = 1
-# 방에 사람이 k명까지 들어올 수 있음
-while True:
-    if len(data) == 0:
-        break
-    # 방에 k명이 들어있을 때
-    if current_person == k:
-        current_box = data.pop()
-        ans += 1
-        current_person = 0
-    # 같은 학년 같은 반이 없으면 방을 늘림
-    elif current_box not in data:
-        current_box = data.pop()
-        ans += 1
-        current_person = 0
+    if s == 0:
+        female[y] += 1
+    elif s == 1:
+        male[y] += 1
+
+for i in range(1, 7):
+    # 인원별 맞게 떨어질 때
+    if male[i] % k == 0:
+        male[i] = male[i] // k
+    # 아닐때
     else:
-        current_person += data.count(current_box)
-        data.remove(current_box)
+        male[i] = male[i] // k + 1
 
-print(ans)
-
-
-
-
-
+    if female[i] % k == 0:
+        female[i] = female[i] // k
+    else:
+        female[i] = female[i] // k + 1
+print(sum(female) + sum(male))
 
 
