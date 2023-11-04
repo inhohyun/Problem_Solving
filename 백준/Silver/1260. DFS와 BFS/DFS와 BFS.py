@@ -1,38 +1,33 @@
 from collections import deque
+n, m, v = map(int, input().split())
+graph = [[0] * (n+1) for _ in range(n+1)]
+for i in range(m):
+    x,y = map(int, input().split())
+    graph[x][y] = 1
+    graph[y][x] = 1
+# 왜 visited 배열은 일차원으로 선정했지?
+visited1 = [False] * (n+1)
+visited2 = [False] * (n+1)
 
-N, M, V = map(int, input().split())
+def bfs(v):
+    q = deque([v])
+    visited2[v] = True
+    while q:
+        v = q.popleft()
+        print(v, end=' ')
+        for i in range(1, n+1):
+            if not visited2[i] and graph[v][i]: #만약 해당 i값을 방문하지 않았고 V와 연결이 되어 있다면
+                q.append(i)
+                visited2[i] = True
 
-graph = [[False] * (N + 1) for _ in range(N + 1)]
+# 동서남북 탐색하는건 알겠는데 그래프 탐색이 기억이 안나네?
+def dfs(v):
+    visited1[v] = True
+    print(v, end=' ')
+    for i in range(1, n+1):
+        if not visited1[i] and graph[v][i]:
+            dfs(i)
 
-for _ in range(M):
-    a, b = map(int, input().split())
-    graph[a][b] = True
-    graph[b][a] = True
-
-visited1 = [False] * (N + 1)  # dfs의 방문기록
-visited2 = [False] * (N + 1)  # bfs의 방문기록
-
-
-def bfs(V):
-    q = deque([V])  # pop메서드의 시간복잡도가 낮은 덱 내장 메서드를 이용한다
-    visited2[V] = True  # 해당 V 값을 방문처리
-    while q:  # q가 빌때까지 돈다.
-        V = q.popleft()  # 큐에 있는 첫번째 값 꺼낸다.
-        print(V, end=" ")  # 해당 값 출력
-        for i in range(1, N + 1):  # 1부터 N까지 돈다
-            if not visited2[i] and graph[V][i]:  # 만약 해당 i값을 방문하지 않았고 V와 연결이 되어 있다면
-                q.append(i)  # 그 i 값을 추가
-                visited2[i] = True  # i 값을 방문처리
-
-
-def dfs(V):
-    visited1[V] = True  # 해당 V값 방문처리
-    print(V, end=" ")
-    for i in range(1, N + 1):
-        if not visited1[i] and graph[V][i]:  # 만약 i값을 방문하지 않았고 V와 연결이 되어 있다면
-            dfs(i)  # 해당 i 값으로 dfs를 돈다.(더 깊이 탐색)
-
-
-dfs(V)
+dfs(v)
 print()
-bfs(V)
+bfs(v)
