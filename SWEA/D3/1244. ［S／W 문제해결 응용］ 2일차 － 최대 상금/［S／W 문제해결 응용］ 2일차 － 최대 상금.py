@@ -1,33 +1,25 @@
-def dfs(n):
-    global ans
-    if n == N:
-        ans = max(ans, int(''.join(map(str, lst))))
+# 가지치기 하기 -> 해봤던건 다시 해볼 필요가 없다.
+# 이미 처리했으면 중복방지? -> 뭔소리야
+def dfs(cnt):
+    global result, number
+    
+    if cnt == c:
+        result = max(result, int(''.join(map(str, number)))) # 결과를 바로 최대값으로 갱신
         return
-    # L 개에서 2개 뽑는 모든 조합(들을 교환)
-    for i in range(L-1):
-        for j in range(i+1, L):
-            lst[i], lst[j] = lst[j], lst[i]
+    for i in range(len(number)):
+        for j in range(i+1, len(number)):
+            number[i], number[j] = number[j], number[i]
+            chk = int(''.join(map(str, number))) 
+            if (cnt, chk) not in v:            
+                dfs(cnt+1)
+                v.append((cnt,chk))
+            number[i], number[j] = number[j], number[i]
 
-            chk = int(''.join(map(str, lst)))
-
-            # 이미 해본 경우는 넘기자
-            if (n, chk) not in v:
-                dfs(n+1)
-                v.append((n,chk))
-
-            lst[i], lst[j] = lst[j], lst[i]
-
-T = int(input())
-for tc in range(1, T+1):
-    st, t = input().split()
-
-    N = int(t)
-    lst = []
-
-    for ch in st:
-        lst.append(ch)
-    L = len(lst)
-    ans = 0
-    v = []
+t = int(input())
+for tc in range(1, t+1):
+    n, c = map(int, input().split())
+    number = list(map(int, list(str(n))))
+    result = 0 # 초기값을 0으로 설정
+    v  = []
     dfs(0)
-    print(f'#{tc}', ans)
+    print(f'#{tc}', result)
