@@ -1,19 +1,15 @@
-test = int(input())
-for T in range(1, test+1):
-    # N은 구역
-    # M은 파리채
-    N, M  = map(int, input().split())
-    g = []
+t = int(input())
+for tc in range(1, t+1):
+    n, m = map(int, input().split())
+    arr = [list(map(int, input().split())) for _ in range(n)]
     ans = 0
-    for _ in range(N):
-        g.append(list(map(int, input().split())))
-    
-    for a in range(N-M+1):
-        for b in range(N-M+1):
-            cnt = 0
-            for i in range(a, a+M):
-                for j in range(b, b+M):
-                    cnt += g[i][j]
-            ans = max(ans, cnt)        
-    print(f'#{T}', ans)
+    for i in range(n-m+1):
+        for j in range(n-m+1):
+            tmp = 0
+            for x in range(i, i+m):
+                for y in range(j, j+m):
+                   tmp += arr[x][y]
+            if ans < tmp:
+                ans = tmp
 
+    print(f'#{tc}',ans)
