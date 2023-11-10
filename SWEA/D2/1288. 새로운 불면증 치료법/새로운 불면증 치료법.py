@@ -1,16 +1,17 @@
 t = int(input())
 for tc in range(1, t+1):
     n = int(input())
-    arr = [0,1,2,3,4,5,6,7,8,9]
-    cnt = 1
-    number = 0
+    target = '0123456789'
+    i = 1
     while True:
-        if len(arr) == 0:
+        if len(target) == 0:
             break
-        number = n * cnt
-        for i in range(len(str(number))):
-            if int(str(number)[i]) in arr:
-                arr.remove(int(str(number)[i]))
-        cnt += 1
-    print(f'#{tc}',number)
 
+        tmp = str(n * i)
+        for j in range(len(tmp)):
+            if tmp[j] in target:
+                target = target.replace(tmp[j], '')
+
+        i += 1
+
+    print(f'#{tc}',n*(i-1))
