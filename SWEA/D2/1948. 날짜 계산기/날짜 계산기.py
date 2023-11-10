@@ -1,32 +1,15 @@
 t = int(input())
-# 월별 날짜 배열
-days = [0,31, 28, 31, 30,31,30,31,31,30,31,30,31]
 for tc in range(1, t+1):
-    m1, d1, m2, d2 = map(int, input().split())
+    s_m, s_d, e_m, e_d = map(int, input().split())
+    dic = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}
+
     ans = 0
-    # 달이 같은 경우
-    if m1 == m2:
-        print(f'#{tc}',(d2- d1)+1)
+    for i in range(s_m+1, e_m):
+        ans += dic[i]
+    if s_m == e_m:
+        ans += e_d - s_d +1
     else:
-    # 현재 달
-        ans += days[m1] - d1
-    # 마지막 달
-        ans += d2
-    # 중간 달
-        for i in range(m1+1, m2):
-            ans += days[i]
+        ans += dic[s_m] - s_d +1
+        ans += e_d
 
-        print(f'#{tc}',ans+1)
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print(f'#{tc}',ans)
