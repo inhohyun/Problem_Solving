@@ -1,34 +1,23 @@
 t = int(input())
 for tc in range(1, t+1):
     n = int(input())
-    A, B = [], []
-    for _ in range(n):
-        a, b = input().split()
-        A.append(a)
-        B.append(int(b))
-    ans = []
     s = ''
-    for i in range(n):
-        while B[i] != 0:
-            s += A[i]
-            B[i] -= 1
-            if len(s) == 10:
-                ans.append(s)
-                s = ''
-        # 마지막 줄일때 처리
-        if i == n-1:
-            ans.append(s)
+    for _ in range(n):
+        ch, m = input().split()
+        m = int(m)
+        for i in range(m):
+            s += ch
+    # s를 10줄씩 끝기
+    tmp = ''
+    ans = []
+    for i in range(len(s)):
+        tmp += s[i]
+        if len(tmp) == 10:
+            ans.append(tmp)
+            tmp = ''
+    if tmp != '':
+        ans.append(tmp)
     print(f'#{tc}')
-    for j in range(len(ans)):
-        print(ans[j])
-
-
-
-
-
-
-
-
-
-
+    for a in ans:
+        print(a)
 
