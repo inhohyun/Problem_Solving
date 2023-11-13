@@ -1,22 +1,21 @@
 t = int(input())
-for tc in range(1,t+1):
+for tc in range(1, t+1):
     n = int(input())
-    arr = []
-    for i in range(n):
-        arr.append(list(map(int, list(input()))))
+    arr = [list(map(int, list(input()))) for _ in range(n)]
+
+    start, end = n//2, n//2
     ans = 0
-    mid = n // 2
-    l, r = mid,mid
     for i in range(n):
-        ans += sum(arr[i][l:r+1])
+        for j in range(start, end+1):
+            ans += arr[i][j]
 
-        if i < mid:
-            l -= 1
-            r += 1
-        elif i >= mid:
-            l += 1
-            r -= 1
-
+        if i < n//2:
+      
+            start -= 1
+            end += 1
+        else:
+            
+            start += 1
+            end -= 1
+  
     print(f'#{tc}',ans)
-
-
