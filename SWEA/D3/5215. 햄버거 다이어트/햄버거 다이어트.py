@@ -1,30 +1,32 @@
-def dfs(index, sTaste, sKcal):
-    global maxTaste
+def dfs(depth, sum_tast,sum_kal):
+    global max_tast
 
-    if sKcal > L:
+    if sum_kal > l:
         return
     
-    if maxTaste < sTaste:
-        maxTaste = sTaste
-    
-    if index == N:
-        return
-    
-    taste, kcal = data[index]
+    if sum_tast > max_tast:
+        max_tast = sum_tast
 
-    # 햄버거 재료 리스트에서 재료를 사용
-    dfs(index +1, sTaste+taste, sKcal + kcal)
-    # 햄버거 재료 리스트에서 재료를 사용하지 않았을 때
-    dfs(index +1, sTaste, sKcal)
+    if depth == n:
+        return
+
+
+    # 해당 재료 선택
+    dfs(depth+1, sum_tast+tast[depth], sum_kal+kal[depth])
+    # 해당 재료 선택x
+    dfs(depth+1, sum_tast,sum_kal)
 
 t = int(input())
 for tc in range(1, t+1):
-    N, L =map(int, input().split())
-
-    # 햄버거와 칼로리 리스트 저장
-    data = [list(map(int, input().split())) for _ in range(N)]
-
-    maxTaste = 0
+    n, l = map(int, input().split())
+    max_tast = 0
+    tast, kal = [], []
+    for i in range(n):
+        a, b = map(int, input().split())
+        tast.append(a)
+        kal.append(b)
 
     dfs(0,0,0)
-    print(f'#{tc}', maxTaste)
+    print(f'#{tc}',max_tast)
+
+
