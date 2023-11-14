@@ -1,47 +1,37 @@
-#  S D H C 순으로 카드가 몇 장 부족한지
 t = int(input())
 for tc in range(1, t+1):
     S, D, H, C = [],[],[],[]
     cards = input()
-    flag = 0
-    for i in range(len(cards)):
+    flag = 1
+    for i in range(len(cards)-2):
         if cards[i] == 'S':
-            # 숫자는 무조건 2개(i+1:i+3)
-            # 이미 있으면 에러
-            if int(cards[i+1:i+3]) in S:
+            num = cards[i+1:i+3]
+            if num in S:
+                flag = 0
                 print(f'#{tc}', 'ERROR')
-                flag = 1
                 break
-            else:
-                S.append(int(cards[i+1:i+3]))
-
+            S.append(num)
         if cards[i] == 'D':
-            # 숫자는 무조건 2개(i+1:i+3)
-            # 이미 있으면 에러
-            if int(cards[i+1:i+3]) in D:
+            num = cards[i+1:i+3]
+            if num in D:
+                flag = 0
                 print(f'#{tc}', 'ERROR')
-                flag = 1
                 break
-            else:
-                D.append(int(cards[i+1:i+3]))
+            D.append(num)
         if cards[i] == 'H':
-            # 숫자는 무조건 2개(i+1:i+3)
-            # 이미 있으면 에러
-            if int(cards[i+1:i+3]) in H:
+            num = cards[i+1:i+3]
+            if num in H:
+                flag = 0
                 print(f'#{tc}', 'ERROR')
-                flag = 1
                 break
-            else:
-                H.append(int(cards[i+1:i+3]))
+            H.append(num)
         if cards[i] == 'C':
-            # 숫자는 무조건 2개(i+1:i+3)
-            # 이미 있으면 에러
-            if int(cards[i+1:i+3]) in C:
-                flag = 1
+            num = cards[i+1:i+3]
+            if num in C:
+                flag = 0
                 print(f'#{tc}', 'ERROR')
                 break
-            else:
-                C.append(int(cards[i+1:i+3]))
-    if flag == 0:
-        print(f'#{tc}', 13-len(S),  13-len(D), 13-len(H), 13-len(C))
-                
+            C.append(num)
+ 
+    if flag:
+        print(f'#{tc}', 13-len(S), 13-len(D), 13-len(H), 13-len(C))
