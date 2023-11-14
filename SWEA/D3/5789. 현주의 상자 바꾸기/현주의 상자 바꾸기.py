@@ -1,14 +1,9 @@
-test = int(input())
-for T in range(1, test+1):
+t = int(input())
+for tc in range(1, t+1):
     N, Q = map(int, input().split())
-
-    box = [0] * (N+1)
+    arr = [0 for _ in range(N+1)]
     for i in range(1, Q+1):
         L, R = map(int, input().split())
         for j in range(L, R+1):
-            box[j] = i
-    
-    print(f'#{T}', end=' ')
-    for a in range(1, len(box)):
-        print(box[a], end=' ')
-    print()
+            arr[j] = i
+    print(f'#{tc}', ' '.join(map(str, arr[1:])))
