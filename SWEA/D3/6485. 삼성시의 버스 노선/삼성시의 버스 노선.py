@@ -1,24 +1,21 @@
 t = int(input())
 for tc in range(1, t+1):
-    N = int(input())
+    n = int(input())
     A, B = [], []
-    for _ in range(N):
-        a, b = map(int, input().split())
+    for i in range(n):
+        a,b = map(int, input().split())
         A.append(a)
         B.append(b)
-    P = int(input())
-    C = []
-    ans = [0] * P
-    for i in range(P):
-        C.append(int(input()))
-    
-    # 검증
-    for i in range(P):
-        cnt = 0
-        for j in range(N):
-            if A[j] <= C[i] <= B[j]:
-                cnt += 1
-        
-        ans[i] = cnt
-    
+
+    p = int(input())
+    P = []
+    for i in range(p):
+        P.append(int(input()))
+    ans = [0] * p
+    for i in range(len(P)):
+        for j in range(n):
+            if A[j] <= P[i] <= B[j]:
+                ans[i] += 1
+
     print(f'#{tc}',' '.join(map(str, ans)))
+
