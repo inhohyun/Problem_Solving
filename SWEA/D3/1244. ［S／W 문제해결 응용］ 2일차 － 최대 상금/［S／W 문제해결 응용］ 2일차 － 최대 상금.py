@@ -1,5 +1,3 @@
-# 가지치기 하기 -> 해봤던건 다시 해볼 필요가 없다.
-# 이미 처리했으면 중복방지? -> 뭔소리야
 def dfs(cnt):
     global result, number
     
