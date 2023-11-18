@@ -1,32 +1,31 @@
 from collections import deque
-move = [(0,1), (1,0), (-1,0), (0,-1)]
-def bfs():
-    global q, visited
-    while len(q):
-        i,j = q.popleft()
+dx = [0,0,1,-1]
+dy = [1,-1,0,0]
 
-        for dx, dy in move:
-            ci, cj = i + dx, j + dy
+def bfs(start):
+    global visited
+    q = deque()
+    ci, cj = start
+    q.append((ci,cj))
+    while q:
+        ci, cj = q.popleft()
+        for d in range(4):
+            di = ci + dx[d]
+            dj = cj + dy[d]
+            if 0<= di < n and 0<= dj < n:
+                if visited[di][dj] > visited[ci][cj] + arr[ci][cj]:
+                    visited[di][dj] = visited[ci][cj] + arr[ci][cj]
+                    q.append((di,dj))
 
-            if 0 <= ci < n and 0 <= cj < n :
-                if visited[ci][cj] > visited[i][j] + field[ci][cj]:
-                    visited[ci][cj] = visited[i][j] + field[ci][cj]
-                    q.append((ci,cj))
 
 
-
-
-for t in range(int(input())):
+t = int(input())
+for tc in range(1, t+1):
     n = int(input())
-            
-    field = [list(map(int, list(input()))) for _ in range(n)]
-    inf = float('inf')
-    # 거리별 최소 이동거리를 저장할 배열
-    visited = [[1000000] * n for _ in range(n)]
+    arr = [list(map(int, list(input()))) for _ in range(n)]
+    visited = [[100000] * n for _ in range(n)]
     visited[0][0] = 0
 
-    q = deque()
-    q.append((0,0))
 
-    bfs()
-    print(f'#{t+1}', visited[n-1][n-1])
+    bfs((0,0))
+    print(f'#{tc}',visited[n-1][n-1])
