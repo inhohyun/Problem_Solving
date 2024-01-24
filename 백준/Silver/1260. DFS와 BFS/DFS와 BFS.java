@@ -1,75 +1,72 @@
-
-
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class Main {
-	static int [][] graph;
-	static boolean[] visited  = new boolean[1001]; //입력 케이스 +1
-	static int node, line;
-	static Queue<Integer> q = new LinkedList<>();
-	//인접 행렬로 그래프 구현
-	//1로 표시된 부분은 연결되었다는 뜻
-	public static void putEdge(int[][] graph, int x, int y) {
+
+	static int n;
+	static int m;
+	static int k;
+	static int[][] graph;
+	static boolean[] visited1;
+	static boolean[] visited2;
+
+	public static void main(String[] args) throws IOException {
+		Main main = new Main();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		StringTokenizer st = null;
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		graph = new int[n + 1][n + 1];
+		visited1 = new boolean[n + 1];
+		visited2 = new boolean[n + 1];
+		for (int i = 0; i < m; i++) {
+			st = new StringTokenizer(br.readLine());
+			int x = Integer.parseInt(st.nextToken());
+			int y = Integer.parseInt(st.nextToken());
+			main.add(x, y);
+		}
+		main.dfs(k);
+		System.out.println();
+		main.bfs(k);
+	}
+
+	void add(int x, int y) {
 		graph[x][y] = 1;
 		graph[y][x] = 1;
 	}
 
-	
-	public static void main(String[] args) {
-	Scanner sc = new Scanner(System.in);
-	
-	 node = sc.nextInt();
-	 line = sc.nextInt();
-	int start = sc.nextInt();
-	
-     graph = new int[node+1][node+1];
-	
-	for(int i=0;i<line;i++) {
-		int x = sc.nextInt();
-		int y = sc.nextInt();
-		putEdge(graph, x, y);
-	}
-	//dfs
-	dfs(start);
-	System.out.println();
-	Arrays.fill(visited, false); // 방문 배열 초기화
-    //bfs
-	bfs(start);
-		
-	}
-	//재귀함수로 구현
-	static void dfs(int start) {
-		visited[start] = true;
-		System.out.print(start+" ");
-		
-		//반복 재귀
-		for(int i=1;i<=node;i++) {
-			
-			if(graph[start][i]==1 && !visited[i]) {
-			dfs(i);	
+	void dfs(int start) {
+		System.out.print(start + " ");
+		visited2[start] = true;
+		for (int i = 1; i <= n; i++) {
+			if (graph[start][i] == 1 && !visited2[i]) {
+				dfs(i);
 			}
 		}
 	}
-	
-	//큐로 구현
-	static void bfs(int start) {
+
+	void bfs(int start) {
+		Queue<Integer> q = new LinkedList<>();
 		q.add(start);
-		visited[start] = true;
-		
-		while(!q.isEmpty()) {
+		visited1[start] = true;
+		System.out.print(start + " ");
+		while (!q.isEmpty()) {
 			start = q.poll();
-			System.out.print(start+" ");
-			
-			for(int i=1;i<=node;i++) {
-				if(graph[start][i] ==1 &&!visited[i]) {
+			for (int i = 1; i < n + 1; i++) {
+				if (graph[start][i] == 1 && !visited1[i]) {
+
 					q.add(i);
-					visited[i] = true;
+					visited1[i] = true;
+					System.out.print(i + " ");
 				}
 			}
 		}
+
 	}
-	
+
 }
