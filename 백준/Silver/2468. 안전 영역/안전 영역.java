@@ -1,5 +1,3 @@
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,7 +7,6 @@ public class Main {
 	static int n;
 	static int[][] map;
 	static boolean[][] visited;
-
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,22 +22,22 @@ public class Main {
 			}
 		}
 		int maxCnt = 1; // 아무 지역도 물에 안 잠기면 1이 최소값
-		
+
 		int cnt = 0;
-		for (int i = 1; i <=100; i++) {
+		for (int i = 1; i <= 100; i++) {
 			leak(i);
 			for (int a = 0; a < n; a++) {
 				for (int b = 0; b < n; b++) {
 					if (!visited[a][b]) {
 						bfs(new xy(a, b));
-				//		print(); // i = 1이면 한 번에 전부 false 되어야하는데?
+						// print(); // i = 1이면 한 번에 전부 false 되어야하는데?
 						cnt++;
 					}
-					
+
 				}
-			//	System.out.println(cnt);
+				// System.out.println(cnt);
 			}
-			
+
 			if (maxCnt < cnt) {
 				maxCnt = cnt;
 			}
@@ -51,15 +48,16 @@ public class Main {
 		}
 		System.out.println(maxCnt);
 	}
-	//배열 출력 테스트
-	static void print() {
-		for (int x = 0; x < n; x++) {
-			for (int y = 0; y < n; y++) {
-				System.out.print(visited[x][y]+" ");
-			}
-			System.out.println();
-		}
-		System.out.println("--------------map구분--------------------");
+
+	// 배열 출력 테스트
+//	static void print() {
+//		for (int x = 0; x < n; x++) {
+//			for (int y = 0; y < n; y++) {
+//				System.out.print(visited[x][y] + " ");
+//			}
+//			System.out.println();
+//		}
+//		System.out.println("--------------map구분--------------------");
 //		for (int x = 0; x < n; x++) {
 //			for (int y = 0; y < n; y++) {
 //				System.out.print(map[x][y]+" ");
@@ -67,9 +65,9 @@ public class Main {
 //			System.out.println();
 //		}
 //		System.out.println("-------------------------------------");
-	}
+//	}
 
-	// 좌표를 관리할 클래스?
+	// 좌표를 관리할 클래스
 	static class xy {
 		private int x;
 		private int y;
@@ -94,8 +92,7 @@ public class Main {
 		public void setY(int y) {
 			this.y = y;
 		}
-		
-		
+
 	}
 
 	// 특정 높이 이하 잠기게하기
@@ -120,8 +117,9 @@ public class Main {
 		visited[ci][cj] = true;
 		q.offer(start);
 		while (true) {
-			if(q.size() == 0) break;
-			
+			if (q.size() == 0)
+				break;
+
 			xy a = q.poll();
 			visited[a.getX()][a.getY()] = true;
 			for (int d = 0; d < 4; d++) {
