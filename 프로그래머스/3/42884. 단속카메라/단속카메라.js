@@ -1,19 +1,18 @@
 function solution(routes) {
-    let answer = 0;
-    let preCamera = -30001;
+    let cnt = 1;
+    const o_routes = routes.sort((a,b) => a[1] - b[1]);
     
-    //정렬
-    let sorted_r = routes.slice().sort((a, b) =>{
-         
-            return a[1] - b[1];
+    // const t_routes = o_routes.sort(x => x[0]);
         
-    });
-    
-    sorted_r.forEach((value, index) => {
-        if(value[0] > preCamera){
-            answer++;
-            preCamera = value[1];
+    let current_camara = o_routes[0][1]
+    for(let i = 1; i < routes.length; i++){
+        if(o_routes[i][0] <= current_camara){
+            // current_camara = o_routes[i][1];
         }
-    })
-    return answer;
+        else{
+            cnt++;
+            current_camara = o_routes[i][1];
+        }
+    }
+    return cnt;
 }
