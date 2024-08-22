@@ -1,32 +1,28 @@
 function solution(n, works) {
-    // 총 작업량을 계산
-    let total = works.reduce((prev, curr) => prev + curr, 0);
-    
-    // 작업량이 n 이하이면 모든 작업을 끝낼 수 있으므로 0 반환
-    if (total <= n) {
-        return 0;
-    }
-    
-    // 내림차순으로 정렬
+    // 최대 힙을 만들기 위해 works 배열을 내림차순 정렬
     works.sort((a, b) => b - a);
-    
-    // 남은 작업량을 처리
+
+    // n이 0보다 클 때까지 반복
     while (n > 0) {
+        // 가장 큰 값을 가져옴
+        if (works[0] === 0) break;  // 가장 큰 값이 0이면 더 이상 감소시킬 필요가 없음
+
+        // 가장 큰 값을 1 감소시킴
         works[0]--;
-        n--;
-        
-        // 정렬된 배열에서 첫 번째 작업이 두 번째 작업보다 작아지면 재정렬
+
+        // 감소시킨 후 다시 정렬 (첫 번째 원소만 내림차순 유지하면 됨)
         for (let i = 0; i < works.length - 1; i++) {
             if (works[i] < works[i + 1]) {
+                // 스왑
                 [works[i], works[i + 1]] = [works[i + 1], works[i]];
             } else {
                 break;
             }
         }
+
+        n--;
     }
-    
-    // 남은 작업량의 제곱 합을 계산
-    let answer = works.reduce((sum, work) => sum + work * work, 0);
-    
-    return answer;
+
+    // 결과 계산 (남은 작업량의 제곱합)
+    return works.reduce((acc, work) => acc + work ** 2, 0);
 }
