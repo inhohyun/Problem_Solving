@@ -1,10 +1,8 @@
 function solution(A,B){
-    var answer = 0;
-    A.sort((a,b) => b -a);
-   B.sort((a,b) => a -b);
-    for( let i = 0; i < A.length; i ++) { 
-        answer += A[i] * B[i];
-    }
-
+    
+    let sorted_a = A.sort((a, b) => a - b);
+    let sorted_b = B.sort((a, b) => b - a);
+    
+    const answer = sorted_a.reduce((sum, val, index) => sum + val * sorted_b[index], 0);
     return answer;
 }
