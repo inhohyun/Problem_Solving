@@ -1,10 +1,8 @@
 function solution(s) {
     var answer = '';
-    let arr_s = s.split(" ");
-    arr_s.sort((a, b) => a - b);
-    // console.log(arr_s);
-    let mi = arr_s[0];
-    let ma = arr_s[arr_s.length - 1];
+    const arr_s = s.split(' ');
     
-    return `${mi} ${ma}`;
+    const sorted_arr_s = arr_s.sort((a, b) => a - b);
+    console.log(sorted_arr_s)
+    return `${sorted_arr_s[0]} ${sorted_arr_s[sorted_arr_s.length-1]}`;
 }
