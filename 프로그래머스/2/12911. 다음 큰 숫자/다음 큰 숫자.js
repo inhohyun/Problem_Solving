@@ -1,20 +1,15 @@
 function solution(n) {
     var answer = 0;
-    let cnt = n; 
-    // 하나씩 증가시키며 조건과 맞으면 return
-    while (true) {
-        cnt++;
-        if(countOne(toBin(cnt)) === countOne(toBin(n))){
-            return cnt;
+    const bin_one_cnt = n.toString(2).split(1).length - 1;
+    let temp = n + 1;
+    while (true){
+        let bin_temp = temp.toString(2).split(1).length - 1;
+        
+        if(bin_one_cnt === bin_temp){
+            return temp;
         }
+        
+        temp++;
     }
     return answer;
-}
- //이진수로 변환하는 함수   
-function toBin(num) {
-    return num.toString(2);
-}
-    
-function countOne (str) {
-    return str.split('1').length - 1;
 }
