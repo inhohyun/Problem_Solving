@@ -14,7 +14,8 @@ function solution(progresses, speeds) {
             count = 1;
         }
     }
-
-    answer.push(count); // 마지막 배포
+    // 마지막날꺼 배포 
+    answer.push(count);
+    
     return answer;
 }
