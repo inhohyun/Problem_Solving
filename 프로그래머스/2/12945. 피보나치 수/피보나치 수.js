@@ -1,12 +1,12 @@
 function solution(n) {
-    let a = 0; // dp[0]
-    let b = 1; // dp[1]
-
-    for (let i = 2; i <= n; i++) {
-        const temp = (a + b) % 1234567;
-        a = b;
-        b = temp;
+    
+    let dp = [];
+    dp[0] = 0;
+    dp[1] = 1;
+    
+    for(let i = 2; i <= n; i++){
+        dp[i] = (dp[i-1] +dp[i-2]) % 1234567;
     }
-
-    return n === 0 ? 0 : b;
+    
+    return dp[n];
 }
